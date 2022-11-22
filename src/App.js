@@ -20,6 +20,7 @@ function App() {
           <Nav className="me-auto">
             <Nav.Link onClick={() => { navigate('/') }}>Home</Nav.Link>
             <Nav.Link onClick={() => { navigate('/detail') }}>Detail</Nav.Link>
+            <Nav.Link onClick={() => { navigate('/event') }}>Event</Nav.Link>
           </Nav>
         </Container>
       </Navbar>
@@ -48,6 +49,11 @@ function App() {
           <Route path="location" element={<div>위치 정보</div>} />
         </Route>
 
+        <Route path="/event" element={<Event />}>
+          <Route path="one" element={<p>첫 주문시 양배추즙 서비스</p>} />
+          <Route path="two" element={<p>생일기념 쿠폰받기</p>} />
+        </Route>
+
         {/* 404 페이지 */}
         <Route path="*" element={<div>없는 페이지</div>} />
 
@@ -55,6 +61,15 @@ function App() {
 
     </div>
   );
+}
+
+function Event() {
+  return (
+    <div>
+      <h4>오늘의 이벤트</h4>
+      <Outlet></Outlet>
+    </div>
+  )
 }
 
 function About() {
