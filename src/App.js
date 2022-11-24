@@ -5,6 +5,8 @@ import { useState } from 'react';
 import data from './data.js';
 import { Routes, Route, Link, useNavigate, Outlet } from 'react-router-dom'
 import Detail from './pages/Detail.js'
+import About from './About';
+import Event from './Event';
 
 function App() {
 
@@ -64,28 +66,8 @@ function App() {
 
       </Routes>
 
-
-
     </div>
   );
-}
-
-function Event() {
-  return (
-    <div>
-      <h4>오늘의 이벤트</h4>
-      <Outlet></Outlet>
-    </div>
-  )
-}
-
-function About() {
-  return (
-    <div>
-      <h4>회사 정보</h4>
-      <Outlet></Outlet>
-    </div>
-  )
 }
 
 function Card(props) {
