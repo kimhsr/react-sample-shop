@@ -8,7 +8,7 @@ import Detail from './pages/Detail.js'
 
 function App() {
 
-  let [shoes] = useState(data);
+  let [shoes, setShoes] = useState(data);
   let navigate = useNavigate();
 
   return (
@@ -28,12 +28,17 @@ function App() {
         <Route path="/" element={
           <div>
             <div className="main-bg"></div>
+            <button onClick={() => {
+              let copy = [...shoes];
+              copy.sort((a, b) => a.title.toUpperCase() < b.title.toUpperCase() ? -1 : 1);
+              setShoes(copy);
+            }}>가나다순 정렬</button>
             <div className="container">
               <div className="row">
                 {
                   shoes.map(function (a, i) {
                     return (
-                      <Card shoes={shoes[i]} i={i} />
+                      <Card shoes={shoes[i]} />
                     )
                   })
                 }
@@ -41,6 +46,7 @@ function App() {
             </div>
           </div>
         } />
+
         <Route path="/detail/:id" element={<Detail shoes={shoes} />} />
 
         <Route path="/about" element={<About />}>
@@ -57,6 +63,8 @@ function App() {
         <Route path="*" element={<div>없는 페이지</div>} />
 
       </Routes>
+
+
 
     </div>
   );
@@ -83,7 +91,7 @@ function About() {
 function Card(props) {
   return (
     <div className="col-md-4">
-      <img src={'https://codingapple1.github.io/shop/shoes' + (props.i + 1) + '.jpg'} width="80%" alt={props.i} />
+      <img src={'https://codingapple1.github.io/shop/shoes' + (props.shoes.id + 1) + '.jpg'} width="80%" alt={props.i} />
       <h4>{props.shoes.title}</h4>
       <p>{props.shoes.price}</p>
     </div>
