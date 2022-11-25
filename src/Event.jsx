@@ -1,7 +1,5 @@
 import { Outlet } from "react-router-dom";
 
-export default Event;
-
 function Event() {
   return (
     <div>
@@ -10,3 +8,5 @@ function Event() {
     </div>
   )
 }
+
+export default Event;

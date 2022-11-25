@@ -1,7 +1,5 @@
 import { Outlet } from "react-router-dom";
 
-export default About;
-
 function About() {
   return (
     <div>
@@ -10,3 +8,5 @@ function About() {
     </div>
   )
 }
+
+export default About;
