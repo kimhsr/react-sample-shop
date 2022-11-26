@@ -1,54 +1,70 @@
-import './App.css';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import { Navbar, Container, Nav } from 'react-bootstrap';
-import { useState } from 'react';
-import data from './data.js';
-import { Routes, Route, Link, useNavigate, Outlet } from 'react-router-dom'
-import Detail from './pages/Detail.js'
-import About from './About';
-import Event from './Event';
-import Card from './Card';
+import "./App.css";
+import "bootstrap/dist/css/bootstrap.min.css";
+import { Navbar, Container, Nav } from "react-bootstrap";
+import { useState } from "react";
+import data from "./data.js";
+import { Routes, Route, Link, useNavigate, Outlet } from "react-router-dom";
+import Detail from "./pages/Detail.js";
+import About from "./About";
+import Event from "./Event";
+import Card from "./Card";
+import React from "react";
 
 function App() {
-
   let [shoes, setShoes] = useState(data);
   let navigate = useNavigate();
 
   return (
     <div className="App">
-
       <Navbar bg="dark" variant="dark" className="navbar">
         <Container>
           <Navbar.Brand href="#home">ShoeShop</Navbar.Brand>
           <Nav className="me-auto">
-            <Nav.Link onClick={() => { navigate('/') }}>Home</Nav.Link>
-            <Nav.Link onClick={() => { navigate('/detail/0') }}>Detail</Nav.Link>
+            <Nav.Link
+              onClick={() => {
+                navigate("/");
+              }}
+            >
+              Home
+            </Nav.Link>
+            <Nav.Link
+              onClick={() => {
+                navigate("/detail/0");
+              }}
+            >
+              Detail
+            </Nav.Link>
           </Nav>
         </Container>
       </Navbar>
 
       <Routes>
-        <Route path="/" element={
-          <div>
-            <div className="main-bg"></div>
-            <button onClick={() => {
-              let copy = [...shoes];
-              copy.sort((a, b) => a.title.toUpperCase() < b.title.toUpperCase() ? -1 : 1);
-              setShoes(copy);
-            }}>가나다순 정렬</button>
-            <div className="container">
-              <div className="row">
-                {
-                  shoes.map(function (a, i) {
-                    return (
-                      <Card shoes={a} key={a.id}/>
-                    )
-                  })
-                }
+        <Route
+          path="/"
+          element={
+            <div>
+              <div className="main-bg"></div>
+              <button
+                onClick={() => {
+                  let copy = [...shoes];
+                  copy.sort((a, b) =>
+                    a.title.toUpperCase() < b.title.toUpperCase() ? -1 : 1
+                  );
+                  setShoes(copy);
+                }}
+              >
+                가나다순 정렬
+              </button>
+              <div className="container">
+                <div className="row">
+                  {shoes.map(function (a, i) {
+                    return <Card shoes={a} key={a.id} />;
+                  })}
+                </div>
               </div>
             </div>
-          </div>
-        } />
+          }
+        />
 
         <Route path="/detail/:id" element={<Detail shoes={shoes} />} />
 
@@ -64,9 +80,7 @@ function App() {
 
         {/* 404 페이지 */}
         <Route path="*" element={<div>없는 페이지</div>} />
-
       </Routes>
-
     </div>
   );
 }
