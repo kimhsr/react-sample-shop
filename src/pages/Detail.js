@@ -4,10 +4,13 @@ import { useParams } from "react-router-dom";
 
 function Detail(props) {
   useEffect(() => {
-    console.log("안녕");
+    setTimeout(() => {
+      setAlert(false);
+    }, 10000);
   });
 
   let [count, setCount] = useState(0);
+  let [alert, setAlert] = useState(true);
 
   let { id } = useParams();
   id = parseInt(id);
@@ -17,6 +20,9 @@ function Detail(props) {
 
   return 찾은상품 !== undefined ? (
     <div className="container">
+      {alert === true ? (
+        <div className="alert alert-warning">10초 이내 구매시 할인</div>
+      ) : null}
       {count}
       <button
         onClick={() => {
