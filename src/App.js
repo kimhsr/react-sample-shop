@@ -76,7 +76,7 @@ function App() {
                     });
                 }}
               >
-                버튼
+                상품 더보기
               </button>
             </div>
           }
