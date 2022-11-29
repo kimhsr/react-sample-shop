@@ -3,25 +3,28 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
 function Detail(props) {
-  useEffect(() => {
-    setTimeout(() => {
-      setAlert(false);
-    }, 10000);
-  });
-
-  let [count, setCount] = useState(0);
-  let [alert, setAlert] = useState(true);
-
   let { id } = useParams();
   id = parseInt(id);
   let 찾은상품 = props.shoes.find(function (x) {
     return x.id === id;
   });
 
+  let [count, setCount] = useState(0);
+  let [alert, setAlert] = useState(true);
+
+  useEffect(() => {
+    let a = setTimeout(() => {
+      setAlert(false);
+    }, 5000);
+    return () => {
+      clearTimeout(a);
+    };
+  }, []);
+
   return 찾은상품 !== undefined ? (
     <div className="container">
       {alert === true ? (
-        <div className="alert alert-warning">10초 이내 구매시 할인</div>
+        <div className="alert alert-warning">5초 이내 구매시 할인</div>
       ) : null}
       {count}
       <button
