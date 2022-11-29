@@ -68,11 +68,12 @@ function App() {
                   axios
                     .get("https://codingapple1.github.io/shop/data2.json")
                     .then((result) => {
-                      console.log(result.data);
+                      let copy = [...shoes, ...result.data];
+                      setShoes(copy);
                     })
-                    .catch(()=>{
-                      console.log('실패하였습니다.');
-                    })
+                    .catch(() => {
+                      console.log("실패하였습니다.");
+                    });
                 }}
               >
                 버튼
