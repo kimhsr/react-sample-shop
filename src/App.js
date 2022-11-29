@@ -74,6 +74,15 @@ function App() {
                     .catch(() => {
                       console.log("실패하였습니다.");
                     });
+
+                    // post, Promise.all 동시에 ajax 요청 여러개 하려면
+                    axios.post('/url', {name : 'kim'})
+                    Promise.all([ axios.get('/url1'), axios.get('/url2')])
+                    .then(()=> {
+                    })
+
+                    // 따옴표쳐놓으면 array, object도 주고받기 가능
+                    // "{"name" : "kim"}"
                 }}
               >
                 상품 더보기
