@@ -9,6 +9,7 @@ import About from "./About";
 import Event from "./Event";
 import Card from "./Card";
 import React from "react";
+import axios from "axios";
 
 function App() {
   let [shoes, setShoes] = useState(data);
@@ -62,6 +63,20 @@ function App() {
                   })}
                 </div>
               </div>
+              <button
+                onClick={() => {
+                  axios
+                    .get("https://codingapple1.github.io/shop/data2.json")
+                    .then((result) => {
+                      console.log(result.data);
+                    })
+                    .catch(()=>{
+                      console.log('실패하였습니다.');
+                    })
+                }}
+              >
+                버튼
+              </button>
             </div>
           }
         />
