@@ -10,20 +10,28 @@ function Detail(props) {
   });
 
   let [count, setCount] = useState(0);
-  let [alert, setAlert] = useState(true);
+  let [alertB, setAlertB] = useState(true);
 
   useEffect(() => {
     let a = setTimeout(() => {
-      setAlert(false);
+      setAlertB(false);
     }, 5000);
     return () => {
       clearTimeout(a);
     };
   }, []);
 
+  let [num, setNum] = useState("");
+
+  useEffect(() => {
+    if (isNaN(num) === true){
+      alert('숫자를 입력해주세요.');
+    }
+  }, [num]);
+
   return 찾은상품 !== undefined ? (
     <div className="container">
-      {alert === true ? (
+      {alertB === true ? (
         <div className="alert alert-warning">5초 이내 구매시 할인</div>
       ) : null}
       {count}
@@ -47,6 +55,11 @@ function Detail(props) {
           />
         </div>
         <div className="col-md-6">
+          <input
+            onChange={(e) => {
+              setNum(e.target.value);
+            }}
+          />
           <h4 className="pt-5">{찾은상품.title}</h4>
           <p>{찾은상품.content}</p>
           <p>{찾은상품.price}원</p>
