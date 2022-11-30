@@ -1,22 +1,16 @@
 /* eslint-disable no-undef */
 // @ts-nocheck
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Nav } from "react-bootstrap";
 
-import {Context1} from './../App.js'
-
 function Detail(props) {
-
-  let {재고} = useContext(Context1)
-
   let { id } = useParams();
   id = parseInt(id);
   let 찾은상품 = props.shoes.find(function (x) {
     return x.id === id;
   });
 
-  let [count, setCount] = useState(0);
   let [alertB, setAlertB] = useState(true);
   let [tab, setTab] = useState(0);
 
@@ -28,14 +22,6 @@ function Detail(props) {
       clearTimeout(a);
     };
   }, []);
-
-  let [num, setNum] = useState("");
-
-  useEffect(() => {
-    if (isNaN(num) === true) {
-      alert("숫자를 입력해주세요.");
-    }
-  }, [num]);
 
   let [fade2, setFade2] = useState("");
 
@@ -52,8 +38,6 @@ function Detail(props) {
         <div className="alert alert-warning">5초 이내 구매시 할인</div>
       ) : null}
 
-      {재고}
-
       <div className="row">
         <div className="col-md-6">
           <img
@@ -67,11 +51,6 @@ function Detail(props) {
           />
         </div>
         <div className="col-md-6">
-          <input
-            onChange={(e) => {
-              setNum(e.target.value);
-            }}
-          />
           <h4 className="pt-5">{찾은상품.title}</h4>
           <p>{찾은상품.content}</p>
           <p>{찾은상품.price}원</p>
@@ -120,7 +99,6 @@ function Detail(props) {
 
 function TabContent({ tab }) {
   let [fade, setFade] = useState("");
-  let {재고} = useContext(Context1)
 
   useEffect(() => {
     let a = setTimeout(() => {
@@ -134,7 +112,7 @@ function TabContent({ tab }) {
 
   return (
     <div className={`start ${fade}`}>
-      {[<div>{재고}</div>, <div>내용1</div>, <div>내용2</div>][tab]}
+      {[<div>내용0</div>, <div>내용1</div>, <div>내용2</div>][tab]}
     </div>
   );
 }
