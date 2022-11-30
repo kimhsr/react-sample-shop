@@ -1,10 +1,15 @@
 /* eslint-disable no-undef */
 // @ts-nocheck
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Nav } from "react-bootstrap";
 
+import {Context1} from './../App.js'
+
 function Detail(props) {
+
+  let {재고} = useContext(Context1)
+
   let { id } = useParams();
   id = parseInt(id);
   let 찾은상품 = props.shoes.find(function (x) {
@@ -46,14 +51,9 @@ function Detail(props) {
       {alertB === true ? (
         <div className="alert alert-warning">5초 이내 구매시 할인</div>
       ) : null}
-      {count}
-      <button
-        onClick={() => {
-          setCount(count + 1);
-        }}
-      >
-        버튼
-      </button>
+
+      {재고}
+
       <div className="row">
         <div className="col-md-6">
           <img
@@ -120,6 +120,7 @@ function Detail(props) {
 
 function TabContent({ tab }) {
   let [fade, setFade] = useState("");
+  let {재고} = useContext(Context1)
 
   useEffect(() => {
     let a = setTimeout(() => {
@@ -133,7 +134,7 @@ function TabContent({ tab }) {
 
   return (
     <div className={`start ${fade}`}>
-      {[<div>내용0</div>, <div>내용1</div>, <div>내용2</div>][tab]}
+      {[<div>{재고}</div>, <div>내용1</div>, <div>내용2</div>][tab]}
     </div>
   );
 }

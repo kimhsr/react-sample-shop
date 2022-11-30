@@ -1,7 +1,8 @@
+// @ts-nocheck
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Navbar, Container, Nav } from "react-bootstrap";
-import { useState } from "react";
+import { createContext, useState } from "react";
 import data from "./data.js";
 import { Routes, Route, Link, useNavigate, Outlet } from "react-router-dom";
 import Detail from "./pages/Detail.js";
@@ -11,8 +12,11 @@ import Card from "./Card";
 import React from "react";
 import axios from "axios";
 
+export let Context1 = createContext();
+
 function App() {
   let [shoes, setShoes] = useState(data);
+  let [재고] = useState([10, 11, 12]);
   let navigate = useNavigate();
 
   return (
@@ -82,7 +86,11 @@ function App() {
           }
         />
 
-        <Route path="/detail/:id" element={<Detail shoes={shoes} />} />
+        <Route path="/detail/:id" element={
+          <Context1.Provider value={{ 재고 }}>
+            <Detail shoes={shoes} />
+          </Context1.Provider>
+        } />
 
         <Route path="/about" element={<About />}>
           <Route path="member" element={<div>멤버</div>} />
