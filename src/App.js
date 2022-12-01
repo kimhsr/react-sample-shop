@@ -1,3 +1,4 @@
+// @ts-nocheck
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Navbar, Container, Nav } from "react-bootstrap";
@@ -13,6 +14,11 @@ import axios from "axios";
 import Cart from "./pages/Cart.js";
 
 function App() {
+  let obj = { name: "kim" };
+  localStorage.setItem("data", JSON.stringify(obj));
+  let 꺼낸거 = localStorage.getItem('data');
+  console.log(JSON.parse(꺼낸거).name);
+
   let [shoes, setShoes] = useState(data);
   let navigate = useNavigate();
 
@@ -92,9 +98,7 @@ function App() {
 
         <Route path="/detail/:id" element={<Detail shoes={shoes} />} />
 
-        <Route path="/cart" element={ <Cart/> }>
-
-        </Route>
+        <Route path="/cart" element={<Cart />}></Route>
 
         <Route path="/about" element={<About />}>
           <Route path="member" element={<div>멤버</div>} />
