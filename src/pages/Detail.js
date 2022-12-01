@@ -3,6 +3,8 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Nav } from "react-bootstrap";
+import { addItem } from "../store.js";
+import { useDispatch } from "react-redux";
 
 function Detail(props) {
   let { id } = useParams();
@@ -13,6 +15,8 @@ function Detail(props) {
 
   let [alertB, setAlertB] = useState(true);
   let [tab, setTab] = useState(0);
+  let [fade2, setFade2] = useState("");
+  let dispatch = useDispatch();
 
   useEffect(() => {
     let a = setTimeout(() => {
@@ -22,8 +26,6 @@ function Detail(props) {
       clearTimeout(a);
     };
   }, []);
-
-  let [fade2, setFade2] = useState("");
 
   useEffect(() => {
     setFade2("end");
@@ -54,7 +56,14 @@ function Detail(props) {
           <h4 className="pt-5">{찾은상품.title}</h4>
           <p>{찾은상품.content}</p>
           <p>{찾은상품.price}원</p>
-          <button className="btn btn-danger">주문하기</button>
+          <button
+            className="btn btn-danger"
+            onClick={() => {
+              dispatch(addItem({ id: 1, name: "Red Knit", count: 1 }));
+            }}
+          >
+            주문하기
+          </button>
         </div>
       </div>
 
