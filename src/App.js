@@ -2,7 +2,7 @@
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Navbar, Container, Nav } from "react-bootstrap";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import data from "./data.js";
 import { Routes, Route, Link, useNavigate, Outlet } from "react-router-dom";
 import Detail from "./pages/Detail.js";
@@ -14,10 +14,9 @@ import axios from "axios";
 import Cart from "./pages/Cart.js";
 
 function App() {
-  let obj = { name: "kim" };
-  localStorage.setItem("data", JSON.stringify(obj));
-  let 꺼낸거 = localStorage.getItem('data');
-  console.log(JSON.parse(꺼낸거).name);
+  useEffect(() => {
+    localStorage.setItem("watched", JSON.stringify([]));
+  }, []);
 
   let [shoes, setShoes] = useState(data);
   let navigate = useNavigate();
@@ -26,7 +25,13 @@ function App() {
     <div className="App">
       <Navbar bg="dark" variant="dark" className="navbar">
         <Container>
-          <Navbar.Brand href="#home">ShoeShop</Navbar.Brand>
+          <Navbar.Brand
+            onClick={() => {
+              navigate("/");
+            }}
+          >
+            ShoeShop
+          </Navbar.Brand>
           <Nav className="me-auto">
             <Nav.Link
               onClick={() => {

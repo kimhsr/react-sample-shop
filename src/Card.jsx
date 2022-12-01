@@ -1,6 +1,9 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 function Card(props) {
+  let navigate = useNavigate();
+
   return (
     <div className="col-md-4">
       <img
@@ -10,6 +13,9 @@ function Card(props) {
           ".jpg"
         }
         width="80%"
+        onClick={() => {
+          navigate("/detail/" + props.shoes.id);
+        }}
         alt={props.i}
       />
       <h4>{props.shoes.title}</h4>
