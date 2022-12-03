@@ -55,6 +55,9 @@ function App() {
               Cart
             </Nav.Link>
           </Nav>
+          <Nav.Link>
+              Cart
+          </Nav.Link>
         </Container>
       </Navbar>
 

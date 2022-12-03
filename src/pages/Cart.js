@@ -3,7 +3,7 @@ import React from "react";
 import { Table } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { addCount } from "../store.js";
-import { changeName, increase } from "../store/userSlice";
+import { increase } from "../store/userSlice";
 
 function Cart() {
   let state = useSelector((state) => {
