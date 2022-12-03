@@ -12,6 +12,7 @@ import Card from "./Card";
 import React from "react";
 import axios from "axios";
 import Cart from "./pages/Cart.js";
+import { useQuery } from "react-query";
 
 function App() {
   useEffect(() => {
@@ -20,6 +21,16 @@ function App() {
 
   let [shoes, setShoes] = useState(data);
   let navigate = useNavigate();
+
+  let result = useQuery("작명", () => {
+    return axios
+      .get("https://codingapple1.github.io/userdata.json")
+      .then((a) => {
+        return a.data;
+      });
+    // ,
+    // { staleTime : 2000}
+  });
 
   return (
     <div className="App">
@@ -55,9 +66,12 @@ function App() {
               Cart
             </Nav.Link>
           </Nav>
-          <Nav.Link>
-              Cart
-          </Nav.Link>
+          <Nav className="ms-auto">
+            {/* { result.isLoading ? '로딩중' : result.data.name } */}
+            {result.isLoading && "로딩중"}
+            {result.error && "에러"}
+            {result.data && result.data.name}
+          </Nav>
         </Container>
       </Navbar>
 
